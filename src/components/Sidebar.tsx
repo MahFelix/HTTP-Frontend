@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertOctagon, Menu, X } from 'lucide-react';
 import { errorCategories } from '../App';
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      // Fecha o menu quando redimensiona para desktop
       if (window.innerWidth >= 768) {
         setIsOpen(false);
       }
@@ -23,6 +23,17 @@ const Sidebar = () => {
   }, []);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/') {
+      e.preventDefault();
+      navigate('/');
+      window.location.reload(); // Força a recarga da página
+    }
+    if (isMobile) {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <>
@@ -64,7 +75,7 @@ const Sidebar = () => {
           <Link 
             to="/" 
             className="flex items-center space-x-3"
-            onClick={() => isMobile && setIsOpen(false)}
+            onClick={handleHomeClick}
           >
             <AlertOctagon className="w-8 h-8 text-indigo-600" />
             <span className="text-xl font-bold text-gray-800">HTTP Explorer</span>
