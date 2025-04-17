@@ -1039,110 +1039,115 @@ const fetchWithTimeout = async (url, timeout = 5000) => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 py-4">
       <Link
         to="/"
-        className="inline-flex items-center text-indigo-600 hover:text-indigo-700 mb-8"
+        className="inline-flex items-center text-indigo-600 hover:text-indigo-700 mb-6 text-sm md:text-base"
       >
-        <ArrowLeft className="w-5 h-5 mr-2" />
+        <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 mr-2" />
         Voltar ao Dashboard
       </Link>
-
+  
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-lg shadow-lg p-8"
+        className="bg-white rounded-lg shadow-lg p-4 md:p-8"
       >
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800">
+        <div className="mb-6">
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-800">
             {code} - {error.title}
           </h1>
-          <p className="text-xl text-gray-600 mt-4">{error.description}</p>
+          <p className="text-base md:text-xl text-gray-600 mt-2 md:mt-4">{error.description}</p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+  
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 mb-6 md:mb-8">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-              <Terminal className="w-6 h-6 mr-2" />
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3 flex items-center">
+              <Terminal className="w-5 h-5 md:w-6 md:h-6 mr-2" />
               Causas Comuns
             </h2>
-            <ul className="list-disc list-inside space-y-2">
+            <ul className="list-disc list-inside space-y-1 md:space-y-2 pl-2">
               {error.causes.map((cause: string, index: number) => (
-                <li key={index} className="text-gray-600">{cause}</li>
+                <li key={index} className="text-sm md:text-base text-gray-600">{cause}</li>
               ))}
             </ul>
           </div>
-
+  
           <div>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-              <BookOpen className="w-6 h-6 mr-2" />
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3 flex items-center">
+              <BookOpen className="w-5 h-5 md:w-6 md:h-6 mr-2" />
               Soluções
             </h2>
-            <ul className="list-disc list-inside space-y-2">
+            <ul className="list-disc list-inside space-y-1 md:space-y-2 pl-2">
               {error.solutions.map((solution: string, index: number) => (
-                <li key={index} className="text-gray-600">{solution}</li>
+                <li key={index} className="text-sm md:text-base text-gray-600">{solution}</li>
               ))}
             </ul>
           </div>
         </div>
-
+  
         <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
-            <Code className="w-6 h-6 mr-2" />
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4 flex items-center">
+            <Code className="w-5 h-5 md:w-6 md:h-6 mr-2" />
             Exemplos de Código
           </h2>
-          <div className="grid grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 gap-4 md:gap-8">
             <div>
-              <div className="flex justify-between items-center mb-2">
-                <h3 className="text-lg font-medium text-gray-700">Frontend</h3>
+              <div className="flex justify-between items-center mb-1 md:mb-2">
+                <h3 className="text-base md:text-lg font-medium text-gray-700">Frontend</h3>
                 <button
                   onClick={() => handleCopy(error.examples.frontend, 'frontend')}
                   className="text-indigo-600 hover:text-indigo-700"
+                  aria-label="Copiar código frontend"
                 >
                   {copied === 'frontend' ? (
-                    <Check className="w-5 h-5" />
+                    <Check className="w-4 h-4 md:w-5 md:h-5" />
                   ) : (
-                    <Copy className="w-5 h-5" />
+                    <Copy className="w-4 h-4 md:w-5 md:h-5" />
                   )}
                 </button>
               </div>
-              <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+              <pre className="bg-gray-100 p-2 md:p-4 rounded-lg overflow-x-auto text-xs md:text-sm">
                 <code>{error.examples.frontend}</code>
               </pre>
             </div>
+            
             <div>
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-1 md:mb-2">
                 <div className="flex items-center">
-                  <h3 className="text-lg font-medium text-gray-700">
+                  <h3 className="text-base md:text-lg font-medium text-gray-700">
                     Backend ({backendLanguages[currentBackendIndex]})
                   </h3>
-                  <div className="flex items-center ml-4">
+                  <div className="flex items-center ml-2 md:ml-4">
                     <button
                       onClick={prevBackendExample}
                       className="p-1 rounded-full hover:bg-gray-200"
+                      aria-label="Exemplo anterior"
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                     <button
                       onClick={nextBackendExample}
                       className="p-1 rounded-full hover:bg-gray-200"
+                      aria-label="Próximo exemplo"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                   </div>
                 </div>
                 <button
                   onClick={() => handleCopy(getBackendExample(code || '', backendLanguages[currentBackendIndex]), 'backend')}
                   className="text-indigo-600 hover:text-indigo-700"
+                  aria-label="Copiar código backend"
                 >
                   {copied === 'backend' ? (
-                    <Check className="w-5 h-5" />
+                    <Check className="w-4 h-4 md:w-5 md:h-5" />
                   ) : (
-                    <Copy className="w-5 h-5" />
+                    <Copy className="w-4 h-4 md:w-5 md:h-5" />
                   )}
                 </button>
               </div>
-              <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+              <pre className="bg-gray-100 p-2 md:p-4 rounded-lg overflow-x-auto text-xs md:text-sm">
                 <code>{getBackendExample(code || '', backendLanguages[currentBackendIndex])}</code>
               </pre>
             </div>
