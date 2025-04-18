@@ -38,7 +38,7 @@ export const errorCategories = [
   },
   {
     id: 'ai-solution',
-    title: 'Solução com IA',
+    title: 'Dr.Http',
     icon: <Brain className="w-6 h-6 text-purple-500" />,
     color: 'text-purple-500',
     description: 'Área inteligente com um assistente virtual especializado em resolver erros HTTP',
